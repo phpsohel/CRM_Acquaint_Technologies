@@ -1,0 +1,4 @@
+name,company,web,email,phone_number,address,description,lead_status_id,lead_source_id,employee_id,lead_category_id,stage,status,created_at,updated_at
+Mohammad Kamrul Hassan,A-Tex Label (BD) Ltd,,kamrul@a-texlabelbd.com,1755501507,"House # 483 (4th floor, Lift-5), Road @ 8 (East Side), DOHS, Baridhara, Dhaka",,5,1,1,4,3,,,
+Mr. Mohammad Kamrul,A-Tex Label (BD) Ltd,,kamrul@a-texlabelbd.com,1755501507,"House # 483 (4th floor, Lift-5), Road @ 8 (East Side), DOHS, Baridhara, Dhaka",,5,1,1,4,3,,,
+Mr. Mohammad Hassan,A-Tex Label (BD) Ltd,,kamrul@a-texlabelbd.com,1755501507,"House # 483 (4th floor, Lift-5), Road @ 8 (East Side), DOHS, Baridhara, Dhaka",,5,1,1,4,3,,,

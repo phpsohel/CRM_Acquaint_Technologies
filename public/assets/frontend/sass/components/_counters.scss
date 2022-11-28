@@ -1,0 +1,21 @@
+// Counters
+.count-container {
+  margin-bottom: 2rem;
+}
+
+.count-wrapper {
+  margin-bottom: .7rem;
+  color: $primary-color;
+  font: 800 3.2rem / 1 $font-family;
+  text-transform: uppercase;
+
+  span + span {
+    font-size: 1.9rem;
+  }
+}
+
+.count-title {
+  margin-bottom: 0;
+  color: #7b858a;
+  font: 400 1.4rem / 1 $font-family;
+}

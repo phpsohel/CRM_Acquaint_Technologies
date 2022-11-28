@@ -1,0 +1,55 @@
+// About
+.about-section {
+  padding: 1rem 0 2.5rem;
+  color: #7b858a;
+  font-size: 1.5rem;
+  line-height: 1.8;
+
+  p {
+    margin-bottom: 2rem;
+  }
+}
+
+.features-section {
+  padding: 5rem 0 2.4rem;
+  background-color: #f1f1f1;
+}
+
+.testimonials-section {
+  padding: 5rem 0;
+
+  .subtitle {
+    margin-bottom: 3.5rem;
+  }
+}
+
+.testimonials-carousel {
+  blockquote {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  &.owl-theme .owl-nav.disabled + .owl-dots {
+    margin-top: .5rem;
+  }
+}
+
+.counters-section {
+  padding: 4.5rem 0 4rem;
+  background-color: #efefef;
+}
+
+@include mq('md') {
+  .about-section {
+    padding-top: 3rem;
+    padding-bottom: 3.5rem;
+  }
+}
+
+@include mq('lg') {
+  .counters-section .col-md-4 {
+    -ms-flex: 0 0 20%;
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+}
