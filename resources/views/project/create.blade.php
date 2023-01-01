@@ -13,7 +13,7 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <label>Project Name *</strong> </label>
+                                        <label> Name *</strong> </label>
                                         <input type="text" name="project_name" required class="form-control">
                                     </div>
 

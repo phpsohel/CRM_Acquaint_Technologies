@@ -30,6 +30,7 @@
                 <tr>
                     <th class="not-exported"></th>
                     <th> Project Name</th>
+                    <th>Company Name</th>
                     <th>Customer</th>
                     {{--<th>Lead</th>--}}
                     <th>Progress</th>
@@ -43,8 +44,9 @@
 
                     <tr data-id="{{$project->id}}">
                         <td>{{$key}}</td>
-                        <td>{{ $project->project_name }}</td>
-                        <td>{{ $project->customer->name }}</td>
+                        <td>{{ $project->project_name ?? '' }}</td>
+                        <td>{{ $project->customer->company_name ?? '' }}</td>
+                        <td>{{ $project->customer->name ?? ''}}</td>
                         {{--<td>{{ $project->lead->name }}</td>--}}
                         <td>
                             <progress id="file"  value="{{ $project->progress }}" max="100"> {{ $project->progress }}% </progress> {{ $project->progress }}%
@@ -102,7 +104,6 @@
                                 <label>Project Name *</strong> </label>
                                 <input type="text" name="project_name" required class="form-control">
                             </div>
-
 
                             <div class="form-group">
                                 <label>Customer *</label>

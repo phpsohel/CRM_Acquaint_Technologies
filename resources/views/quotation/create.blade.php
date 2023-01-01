@@ -20,15 +20,14 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Contact Person *</label>
-                                            <select id="lead_id" name="lead_id" required class="selectpicker form-control" data-live-search="true" id="customer-id" data-live-search-style="begins" title="Select Person...">
+                                            <label>Company Name (Contact Person) *</label>
+                                            <select id="lead_id" name="lead_id" required class="selectpicker form-control" data-live-search="true" id="customer-id" title="Select Person...">
                                                 @foreach($lims_lead_list as $lead)
-                                                <option value="{{$lead->id}}">{{$lead->name . ' (' . $lead->company . ')'}}</option>
+                                                <option value="{{$lead->id}}">{{ $lead->company. ' (' .  $lead->name . ')'}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
-
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Stage *</label>

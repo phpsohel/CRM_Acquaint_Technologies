@@ -9,6 +9,7 @@ use Auth;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use DB;
 
 class RoleController extends Controller
 {
@@ -22,19 +23,19 @@ class RoleController extends Controller
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
     }
 
-    
+
     public function create()
     {
-        
+
     }
 
     public function store(Request $request)
     {
-        
+
        // return $request->all();
         $validated = $request->validate([
             'name' => 'required|unique:roles|max:255',
-            
+
         ]);
 
        // $data = $request->all();
@@ -62,7 +63,7 @@ class RoleController extends Controller
 
     public function update(Request $request, $id)
     {
-       
+
         if(!env('USER_VERIFIED'))
         return redirect()->back()->with('not_permitted', 'This feature is disable for demo!');
 
@@ -74,7 +75,7 @@ class RoleController extends Controller
                 }),
             ],
         ]);
-      
+
 
         $allData = Roles::where('id',$request->role_id)->first();
         $allData->name = $request->name;
@@ -88,18 +89,20 @@ class RoleController extends Controller
     {
         if(Auth::user()->role_id <= 2) {
             $lims_role_data = Roles::find($id);
-            $permissions = Permission::get();
-           // return  $permissions;
+            $permissions =  DB::table('permissions')
+            ->join('role_has_permissions', 'permissions.id', '=', 'role_has_permissions.permission_id')
+            ->where('role_has_permissions.role_id',$id)
+            ->get();
             foreach ($permissions as $permission)
                 $all_permission[] = $permission->name;
             if(empty($all_permission))
             {
                 $all_permission[] = 'dummy text';
-               
+
             }
            // dd($all_permission);
-                
-               
+
+
             return view('role.permission', compact('lims_role_data', 'all_permission'));
         }
         else
@@ -108,7 +111,7 @@ class RoleController extends Controller
 
     public function setPermission(Request $request)
     {
-       
+
       // return $request->all();
         if(!env('USER_VERIFIED'))
             return redirect()->back()->with('not_permitted', 'This feature is disable for demo!');

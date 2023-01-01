@@ -44,8 +44,6 @@ class ProjectController extends Controller
 
 
 
-
-
     public function project_create()
     {
         $role = Role::find(Auth::user()->role_id);

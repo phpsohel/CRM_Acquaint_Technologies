@@ -100,15 +100,14 @@
                     <tr data-id="{{$lead->id}}">
                         <td>{{$key}}</td>
                         <td>{{date($general_setting->date_format, strtotime($lead->date))}}</td>
-                        <td>{{ $lead->name }}</td>
-                        <td>{{ $lead->company }}</td>
-                        <td>{{ $lead->email }}</td>
-                        <td>{{ $lead->phone_number }}</td>
-                        <td>{{ $lead->address }}</td>
-                        <td>{{ $lead->lead_category->lead_cat_name }}</td>
-                        <td>{{ $lead->employee->name}}</td>
+                        <td>{{ $lead->name ?? ''}}</td>
+                        <td>{{ $lead->company ?? '' }}</td>
+                        <td>{{ $lead->email ?? '' }}</td>
+                        <td>{{ $lead->phone_number ?? '' }}</td>
+                        <td>{{ $lead->address ?? '' }}</td>
+                        <td>{{ $lead->lead_category->lead_cat_name ?? '' }}</td>
+                        <td>{{ $lead->employee->name ?? ''}}</td>
                         <td>{{ $lead->thana->name ?? ''}}</td>
-
                         @if($lead->stage == 1 )
                             <td>
                                 <a href="#" class="btn btn-danger"><strong> Unapproved</strong></a>

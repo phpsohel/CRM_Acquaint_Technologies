@@ -50,8 +50,6 @@ class RemainderController extends Controller
 
     public function getRemainderData(Request $request)
     {
-        
-      
         $role = Role::find(Auth::user()->role_id);
         if($role->hasPermissionTo('remainder-index')){
             $permissions = Role::findByName($role->name)->permissions;
@@ -69,8 +67,7 @@ class RemainderController extends Controller
             ->join('users', 'remainders.user_id', '=', 'users.id')
             ->leftjoin('leads', 'leads.id', '=', 'remainders.lead_id')
             ->where([
-                ['users.name', 'LIKE', "%{$request->searchingdata}%"],
-               
+                ['users.name', 'LIKE', "%{$request->searchingdata}%"], 
             ])
             ->orWhere([
                 ['leads.company', 'LIKE', "%{$request->searchingdata}%"],
@@ -200,8 +197,8 @@ class RemainderController extends Controller
     {
 
         $lims_employee_data = Remainder::find($id);
-        $lims_employee_data->status = false;
-        $lims_employee_data->save();
+        // $lims_employee_data->status = false;
+        $lims_employee_data->delete();
         return redirect('remainder')->with('not_permitted', 'Remainder deleted successfully');
     }
 

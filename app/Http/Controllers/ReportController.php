@@ -1387,6 +1387,76 @@ class ReportController extends Controller
         return view('report.purchase_report',compact('product_id', 'variant_id', 'product_name', 'product_qty', 'start_date', 'end_date', 'lims_warehouse_list', 'warehouse_id'));
     }
 
+    public function getleadEmployeeReport(Request $request)
+    {
+        $start_date = date('Y-m-d');
+        $end_date = date('Y-m-d');
+        $employee_id = 0;
+        $lead_cat_id = 0;
+        $thana_id = 0;
+         if ($lead_cat_id == 0 &&  $employee_id == 0 && $thana_id == 0){
+            $lims_lead_data = Lead::whereDate('date', '>=' , $start_date)->whereDate('date', '<=' , $end_date)->where('status', true)->get();
+        }
+        elseif($lead_cat_id  &&  $employee_id && $thana_id ){
+          
+            $lims_lead_data = Lead::where('lead_category_id',$lead_cat_id)
+            ->where('employee_id',$employee_id)
+            ->where('thana_id',$thana_id)
+            ->where('status', true)
+            ->get();
+           // return [$lead_cat_id,$employee_id,$thana_id,$lims_lead_data];
+ 
+        }
+        elseif($lead_cat_id  &&  $employee_id){
+            $lims_lead_data = Lead::where('lead_category_id',$lead_cat_id)
+            ->where('employee_id',$employee_id)
+            ->whereDate('date', '>=' , $start_date)
+            ->whereDate('date', '<=' , $end_date)
+            ->where('status', true)
+            ->get();
+ 
+        }
+        elseif($lead_cat_id && $thana_id ){
+            $lims_lead_data = Lead::where('lead_category_id',$lead_cat_id)
+            ->where('thana_id',$thana_id)
+            ->whereDate('date', '>=' , $start_date)
+            ->whereDate('date', '<=' , $end_date)
+            ->where('status', true)
+            ->get();
+ 
+        }
+        elseif($employee_id && $thana_id ){
+            $lims_lead_data = Lead::where('employee_id',$employee_id)
+            ->where('thana_id',$thana_id)
+            ->where('status', true)
+            ->get();
+ 
+        }
+        elseif($lead_cat_id != 0 ){
+            $lims_lead_data = Lead::where('employee_id',$employee_id)->whereDate('date', '>=' , $start_date)->whereDate('date', '<=' , $end_date)->where('status', true)->get();
+ 
+        }
+        elseif($employee_id != 0){
+            $lims_lead_data = Lead::where('lead_category_id',$lead_cat_id)->whereDate('date', '>=' , $start_date)->whereDate('date', '<=' , $end_date)->where('status', true)->get();
+        }
+        elseif($thana_id != 0){
+            $lims_lead_data = Lead::where('thana_id',$thana_id)->whereDate('date', '>=' , $start_date)->whereDate('date', '<=' , $end_date)->where('status', true)->get();
+         }
+        else{
+           // return "ok";
+            $lims_lead_data = Lead::where('lead_category_id',$lead_cat_id)
+            ->where('thana_id',$thana_id)
+            ->where('employee_id',$employee_id)
+            ->whereDate('date', '>=' , $start_date)
+            ->whereDate('date', '<=' , $end_date)
+            ->where('status', true)->get();
+        }
+        $thanas = Thana::get();
+        $lims_employee_list = Employee::where('is_active', true)->get();
+        $lims_lead_cat_list = LeadCategory::where('status', true)->get();
+        return view('report.lead_employee_report',compact('lims_lead_cat_list','lead_cat_id','lims_lead_data' ,'start_date', 'end_date', 'lims_employee_list','employee_id','thanas','thana_id'));
+
+    }
 
 
 
@@ -1464,7 +1534,25 @@ class ReportController extends Controller
         return view('report.lead_employee_report',compact('lims_lead_cat_list','lead_cat_id','lims_lead_data' ,'start_date', 'end_date', 'lims_employee_list','employee_id','thanas','thana_id'));
     }
 
-
+    public function getleadSourceReport(Request $request){
+        $data = $request->all();
+        $start_date = date('Y-m-d');
+        $end_date = date('Y-m-d');
+        $employee_id = 0;
+        $lead_source_id = 0;
+        if ($lead_source_id == 0 &&  $employee_id == 0 ){
+            $lims_lead_data = Lead::whereDate('date', '>=' , $start_date)->whereDate('date', '<=' , $end_date)->where('status', true)->get();
+        }elseif($lead_source_id == 0 ){
+            $lims_lead_data = Lead::where('employee_id',$employee_id)->whereDate('date', '>=' , $start_date)->whereDate('date', '<=' , $end_date)->where('status', true)->get();
+        }elseif($employee_id == 0){
+            $lims_lead_data = Lead::where('lead_source_id',$lead_source_id)->whereDate('date', '>=' , $start_date)->whereDate('date', '<=' , $end_date)->where('status', true)->get();
+        }else{
+            $lims_lead_data = Lead::where('lead_source_id',$lead_source_id)->where('employee_id',$employee_id)->whereDate('date', '>=' , $start_date)->whereDate('date', '<=' , $end_date)->where('status', true)->get();
+        }
+        $lims_employee_list = Employee::where('is_active', true)->get();
+        $lims_source_list = LeadSource::where('status', true)->get();
+        return view('report.lead_source_report',compact('lims_employee_list','lims_source_list','lead_source_id','lims_lead_data' ,'start_date', 'end_date','employee_id'));
+    }
     public function leadSourceReport(Request $request)
     {
         $data = $request->all();
@@ -1488,6 +1576,27 @@ class ReportController extends Controller
     }
 
 
+    public function getleadStatusReport(Request $request)
+{
+    $data = $request->all();
+    $start_date = date('Y-m-d');
+    $end_date = date('Y-m-d');
+    $employee_id = 0;
+    $lead_status_id = 0;
+    
+    if ($lead_status_id == 0 &&  $employee_id == 0 ){
+        $lims_lead_data = Lead::whereDate('date', '>=' , $start_date)->whereDate('date', '<=' , $end_date)->get();
+    }elseif($lead_status_id == 0 ){
+        $lims_lead_data = Lead::where('employee_id',$employee_id)->whereDate('date', '>=' , $start_date)->whereDate('date', '<=' , $end_date)->where('status', true)->get();
+    }elseif($employee_id == 0){
+        $lims_lead_data = Lead::where('lead_status_id',$lead_status_id)->whereDate('date', '>=' , $start_date)->whereDate('date', '<=' , $end_date)->where('status', true)->get();
+    }else{
+        $lims_lead_data = Lead::where('lead_status_id',$lead_status_id)->where('employee_id',$employee_id)->whereDate('date', '>=' , $start_date)->whereDate('date', '<=' , $end_date)->where('status', true)->get();
+    }
+    $lims_employee_list = Employee::where('is_active', true)->get();
+    $lims_status_list = LeadStatus::where('status', true)->get();
+    return view('report.lead_status_report',compact('lims_employee_list','lims_status_list','lead_status_id','lims_lead_data' ,'start_date', 'end_date','employee_id'));
+}
     public function leadStatusReport(Request $request)
 {
     $data = $request->all();
@@ -1509,15 +1618,14 @@ class ReportController extends Controller
     return view('report.lead_status_report',compact('lims_employee_list','lims_status_list','lead_status_id','lims_lead_data' ,'start_date', 'end_date','employee_id'));
 }
 
-    public function leadReminderReport(Request $request)
+    public function getleadReminderReport(Request $request)
     {
-
         $data = $request->all();
 
-        $start_date = $data['start_date'];
-        $end_date = $data['end_date'];
-        $user_id = $data['user_id'];
-        $stage = $data['stage'];
+        $start_date = date('Y-m-d');
+        $end_date = date('Y-m-d');
+        $user_id = 0;
+        $stage = 2;
         if ($stage == 2 &&  $user_id == 0 ){
             $lims_reminder_data = Remainder::whereDate('noti_datetime', '>=' , $start_date)->whereDate('noti_datetime', '<=' , $end_date)->where('status', true)->get();
         }elseif($stage == 2 ){
@@ -1533,17 +1641,151 @@ class ReportController extends Controller
         $lims_user_list = User::where('is_active', true)->get();
 //        $lims_status_list = LeadStatus::where('status', true)->get();
         return view('report.lead_reminder_report',compact('lims_user_list','stage','lims_reminder_data' ,'start_date', 'end_date','user_id'));
+
+    }
+  public function leadReminderReport(Request $request)
+    {
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+        $user_id  = $request->user_id;
+        $stage = $request->stage;
+
+        if($stage && $start_date && $end_date && $user_id)
+        {
+           if($stage == 2)
+           {
+            $st = 0;
+           }else{
+            $st = 1;
+           }
+        $lims_reminder_data = Remainder::whereBetween('noti_datetime',  array($start_date,$end_date))
+        ->where('stage',$st)
+        ->where('user_id',$user_id)
+        ->orderBy('id','DESC')
+         ->get();
+        }
+        elseif($start_date && $end_date && $user_id)
+        {
+         $lims_reminder_data = Remainder::whereBetween('noti_datetime',  array($start_date,$end_date))
+         ->where('user_id',$user_id)
+         ->orderBy('id','DESC')
+         ->get();
+        }
+        elseif($start_date && $end_date && $stage)
+        {
+         if($stage == 2)
+           {
+            $st = 0;
+           }else{
+            $st = 1;
+           }
+
+          $lims_reminder_data = Remainder::whereBetween('noti_datetime',  array($start_date,$end_date))
+         ->where('stage',$st)
+         ->get();
+        }elseif($start_date && $end_date)
+        {
+         $lims_reminder_data = Remainder::whereBetween('noti_datetime',  array($start_date,$end_date))
+         ->get();
+        }elseif($user_id && $stage)
+        {
+            if($stage == 2)
+           {
+            $st = 0;
+           }else{
+            $st = 1;
+           }
+          $lims_reminder_data = Remainder::where('user_id',$user_id)
+         ->where('stage',$st)
+         ->get();
+        }elseif($user_id)
+        {
+            $lims_reminder_data = Remainder::where('user_id',$user_id)
+            ->orderBy('id','DESC')
+            ->get();
+        }elseif($stage)
+        {
+         if($stage == 2)
+           {
+            $st = 0;
+           }else{
+            $st = 1;
+           }
+         $lims_reminder_data = Remainder::where('stage',$st)
+         ->get();
+
+        }else{
+
+           $lims_reminder_data = Remainder::get();
+        }
+        $lims_user_list = User::where('is_active', true)->get();
+        return view('report.lead_reminder_report',compact('lims_user_list','stage','lims_reminder_data' ,'start_date', 'end_date','user_id'));
     }
 
 
 
+    public function getsaleReport(Request $request)
+    {
+        $data = $request->all();
+        $start_date = date('Y-m-d');
+        $end_date = date('Y-m-d');
+        $warehouse_id = 0;
+        $product_id = [];
+        $variant_id = [];
+        $product_name = [];
+        $product_qty = [];
+        $lims_product_all = Product::select('id', 'name', 'qty', 'is_variant')->where('is_active', true)->get();
+        
+        foreach ($lims_product_all as $product) {
+            $lims_product_sale_data = null;
+            $variant_id_all = [];
+            if($warehouse_id == 0){
+                if($product->is_variant)
+                    $variant_id_all = Product_Sale::distinct('variant_id')->where('product_id', $product->id)->whereDate('created_at', '>=' , $start_date)->whereDate('created_at', '<=' , $end_date)->pluck('variant_id');
+                else
+                    $lims_product_sale_data = Product_Sale::where('product_id', $product->id)->whereDate('created_at', '>=' , $start_date)->whereDate('created_at', '<=' , $end_date)->first();
+            }
+            else {
+                if($product->is_variant)
+                    $variant_id_all = DB::table('sales')
+                        ->join('product_sales', 'sales.id', '=', 'product_sales.sale_id')
+                        ->distinct('variant_id')
+                        ->where([
+                            ['product_sales.product_id', $product->id],
+                            ['sales.warehouse_id', $warehouse_id]
+                        ])->whereDate('sales.created_at','>=', $start_date)
+                          ->whereDate('sales.created_at','<=', $end_date)
+                          ->pluck('variant_id');
+                else
+                    $lims_product_sale_data = DB::table('sales')
+                            ->join('product_sales', 'sales.id', '=', 'product_sales.sale_id')->where([
+                                    ['product_sales.product_id', $product->id],
+                                    ['sales.warehouse_id', $warehouse_id]
+                            ])->whereDate('sales.created_at','>=', $start_date)
+                              ->whereDate('sales.created_at','<=', $end_date)
+                              ->first();
+            }
+            if($lims_product_sale_data) {
+                $product_name[] = $product->name;
+                $product_id[] = $product->id;
+                $variant_id[] = null;
+                if($warehouse_id == 0)
+                    $product_qty[] = $product->qty;
+                else {
+                    $product_qty[] = Product_Warehouse::where([
+                                    ['product_id', $product->id],
+                                    ['warehouse_id', $warehouse_id]
+                                ])->sum('qty');
+                }
+            }
 
+        }
+        $lims_warehouse_list = Warehouse::where('is_active', true)->get();
+        return view('report.sale_report',compact('product_id', 'variant_id', 'product_name', 'product_qty', 'start_date', 'end_date', 'lims_warehouse_list','warehouse_id'));
+    }
     public function saleReport(Request $request)
     {
     	$data = $request->all();
-
-        //return $data;
-
         $start_date = $data['start_date'];
         $end_date = $data['end_date'];
         $warehouse_id = $data['warehouse_id'];
@@ -1625,6 +1867,16 @@ class ReportController extends Controller
 
 
 
+    public function getpaymentReportByDate(Request $request)
+    {
+        
+      //return "ok";
+        $start_date = date('Y-m-d');
+        $end_date = date('Y-m-d');
+        
+        $lims_payment_data = Payment::whereDate('created_at', '>=' , $start_date)->whereDate('created_at', '<=' , $end_date)->get();
+        return view('report.payment_report',compact('lims_payment_data', 'start_date', 'end_date'));
+    }
     public function paymentReportByDate(Request $request)
     {
         $data = $request->all();
@@ -1782,6 +2034,14 @@ class ReportController extends Controller
         return view('report.supplier_report', compact('lims_purchase_data', 'lims_product_purchase_data', 'lims_payment_data', 'supplier_id', 'start_date', 'end_date', 'lims_supplier_list', 'lims_quotation_data', 'lims_product_quotation_data', 'lims_return_data', 'lims_product_return_data'));
     }
 
+    public function getdueReportByDate(Request $request)
+    {
+    	$data = $request->all();
+        $start_date = date('Y-m-d');
+        $end_date = date('Y-m-d');
+        $lims_sale_data = Sale::where('payment_status', '!=', 4)->whereDate('created_at', '>=' , $start_date)->whereDate('created_at', '<=' , $end_date)->get();
+        return view('report.due_report', compact('lims_sale_data', 'start_date', 'end_date'));
+    }
     public function dueReportByDate(Request $request)
     {
     	$data = $request->all();

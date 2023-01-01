@@ -21,8 +21,8 @@
                     <th class="not-exported"></th>
                     <th>{{trans('file.Date')}}</th>
                     <th>{{trans('file.reference')}}</th>
-                    <th>{{trans('file.Biller')}}</th>
-                    <th>{{trans('file.customer')}}</th>
+                    <th>{{trans('Company')}}</th>
+                    <th>{{trans('Person')}}</th>
                     <th>{{trans('file.Sale Status')}}</th>
                     <th>{{trans('file.Payment Status')}}</th>
                     <th>{{trans('file.grand total')}}</th>
@@ -683,7 +683,7 @@
             {"data": "key"},
             {"data": "date"},
             {"data": "reference_no"},
-            {"data": "biller"},
+            {"data": "company"},
             {"data": "customer"},
             {"data": "sale_status"},
             {"data": "payment_status"},

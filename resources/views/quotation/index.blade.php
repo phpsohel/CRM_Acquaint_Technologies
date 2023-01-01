@@ -19,6 +19,7 @@
                     <th class="not-exported"></th>
                     <th>{{trans('file.Date')}}</th>
                     <th>{{trans('file.reference')}}</th>
+                    <th>Company Name</th>
                     <th>Contact Person</th>
                     <th>User</th>
                     <th>{{trans('file.Quotation Status')}}</th>
@@ -40,7 +41,8 @@
                     <td>{{$key}}</td>
                     <td>{{ date($general_setting->date_format, strtotime($quotation->created_at->toDateString())) . ' '. $quotation->created_at->toTimeString() }}</td>
                     <td>{{ $quotation->reference_no ?? '' }}</td>
-                    <td>{{ $quotation->lead->name ?? ''}} ( {{ $quotation->lead->company ?? ''}} )</td>
+                    <td>{{ $quotation->lead->company ?? '' }}</td>
+                    <td>{{ $quotation->lead->name ?? ''}} </td>
                     <td>{{ $quotation->user->name ?? '' }}</td>
                     @if($quotation->quotation_status == 1)
                         <td><div class="badge badge-danger">{{$status}}</div></td>
@@ -107,6 +109,7 @@
             <tfoot class="tfoot active">
                 <th></th>
                 <th>{{trans('file.Total')}}</th>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>

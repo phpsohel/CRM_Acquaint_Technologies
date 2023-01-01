@@ -43,29 +43,31 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade show active" id="product-detail">
                     <br>
-                    @if($lead->name)
+                    @if($lead->name ?? '')
                         <div style="padding: 10px 20px;">
                             <strong>Name:</strong>  {{ $lead->name ?? '' }}
 
                         </div>
                     @endif
-                    @if($lead->company)
+                    @if($lead->company ?? '')
                         <div style="padding: 10px 20px;">
                             <strong>Company:</strong>  {{ $lead->company ?? '' }}
                         </div>
                     @endif
-                    @if($lead->email)
+                    @if($lead->email ?? '')
                         <div style="padding: 10px 20px;">
                             <strong>Email:</strong>  {{ $lead->email  ?? ''}}
                         </div>
                     @endif
-                    @if($lead->phone_number)
+                    @if($lead->phone_number ?? '')
+
                         <div style="padding: 10px 20px;">
                             <strong>Phone Number:</strong>  {{ $lead->phone_number ?? '' }}
                         </div>
                     @endif
 
-                    @if($lead->another_phone_no)
+                    @if($lead->another_phone_no ?? '')
+
                         <div style="padding: 10px 20px;">
                             <strong>Another Phone Number:</strong>  {{ $lead->another_phone_no ?? '' }}
                         </div>
@@ -73,45 +75,51 @@
 
 
 
-                    @if($lead->web)
+                    @if($lead->web ?? '')
+
                         <div style="padding: 10px 20px;">
                             <strong>Website:</strong>  {{ $lead->web  ?? ''}}
                         </div>
                     @endif
-                    @if($lead->address)
+                    @if($lead->address ?? '')
+
                         <div style="padding: 10px 20px;">
                             <strong>Address:</strong>  {{ $lead->address ?? '' }}
                         </div>
                     @endif
 
-                    @if($lead->employee_id)
+                    @if($lead->employee_id ?? '')
+
                         <div style="padding: 10px 20px;">
                             <strong>Employee :</strong>  {{ $lead->employee->name ?? '' }}
                         </div>
                     @endif
 
-                    @if($lead->lead_category_id)
+                    @if($lead->lead_category_id ?? '')
+
                         <div style="padding: 10px 20px;">
                             <strong>Lead Category :</strong>  {{ $lead->lead_category->lead_cat_name ?? '' }}
                         </div>
                     @endif
 
 
-                @if($lead->lead_status_id)
+                @if($lead->lead_status_id ?? '')
+
                         <div style="padding: 10px 20px;">
                             <strong>Lead Status:</strong>  {{ $lead->lead_status->status_name ?? "" }}
                         </div>
                     @endif
 
 
-                    @if($lead->lead_source_id)
+                    @if($lead->lead_source_id ?? '')
+
                         <div style="padding: 10px 20px;">
                             <strong>Lead Source:</strong>  {{ $lead->lead_source->source_name ?? '' }}
                         </div>
                     @endif
 
 
-                    @if($lead->description)
+                    @if($lead->description ?? '')
                         <div style="padding: 10px 20px;">
                             <strong>Description:</strong>  {!! $lead->description ?? '' !!}
                         </div>

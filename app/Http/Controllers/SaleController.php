@@ -184,9 +184,9 @@ class SaleController extends Controller
                 $nestedData['key'] = $key;
                 $nestedData['date'] = date(config('date_format'), strtotime($sale->created_at->toDateString()));
                 $nestedData['reference_no'] = $sale->reference_no;
-                $nestedData['biller'] = 'N/A';
+               // $nestedData['biller'] = 'N/A';
                 $nestedData['customer'] = $sale->customer->name;
-                $nestedData['customer'] = $sale->customer->name;
+                $nestedData['company'] = $sale->customer->company_name;
 
                 if($sale->sale_status == 1){
                     $nestedData['sale_status'] = '<div class="badge badge-success">'.trans('file.Completed').'</div>';

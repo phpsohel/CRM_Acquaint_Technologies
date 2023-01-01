@@ -87,6 +87,11 @@
         <a class="color dark-theme" title="dark" data-color="dark.css"></a>
     </div>
 </div> -->
+<style>
+  .dashboard-counts strong {
+  font-size: 24px;
+  }
+</style>
 <?php if(session()->has('not_permitted')): ?>
   <div class="alert alert-danger alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><?php echo e(session()->get('not_permitted')); ?></div> 
 <?php endif; ?>
@@ -116,34 +121,40 @@
               <div class="row">
                 <!-- Count item widget-->
                 <div class="col-sm-3">
-                  <div class="wrapper count-title text-center">
-                    <div class="icon"><i class="dripicons-graph-bar" style="color: #733686"></i></div>
-                    <div class="name"><strong style="color: #733686">Total Leads</strong></div>
-                    <div class="count-number revenue-data"><?php echo e($total_leads); ?></div>
+                  <div class="wrapper count-title text-center" style="background-color: #733686">
+
+                    <div class="icon"><i class="dripicons-graph-bar" style="color: #fff"></i></div>
+                    <div class="name"><strong style="color: #fff">Total Leads</strong></div>
+                    <div class="count-number revenue-data text-white"><?php echo e($total_leads); ?></div>
                   </div>
                 </div>
                 <!-- Count item widget-->
                 <div class="col-sm-3">
-                  <div class="wrapper count-title text-center">
-                    <div class="icon"><i class="dripicons-return" style="color: #ff8952"></i></div>
-                    <div class="name"><strong style="color: #ff8952">Total Proposals</strong></div>
-                    <div class="count-number return-data"><?php echo e($total_quotation); ?></div>
+                  <div class="wrapper count-title text-center" style="background-color: #ff8952">
+
+
+                    <div class="icon"><i class="dripicons-return" style="color: #fff"></i></div>
+                    <div class="name"><strong style="color: #fff">Total Proposals</strong></div>
+                    <div class="count-number return-data text-white"><?php echo e($total_quotation); ?></div>
+
                   </div>
                 </div>
                 <!-- Count item widget-->
                 <div class="col-sm-3">
-                  <div class="wrapper count-title text-center">
-                    <div class="icon"><i class="dripicons-media-loop" style="color: #00c689"></i></div>
-                    <div class="name"><strong style="color: #00c689">Total Sales</strong></div>
-                    <div class="count-number purchase_return-data"><?php echo e($total_sale); ?></div>
+                  <div class="wrapper count-title text-center" style="background-color: #00c689">
+
+
+                    <div class="icon"><i class="dripicons-media-loop" style="color: #fff"></i></div>
+                    <div class="name"><strong style="color: #fff">Total Sales</strong></div>
+                    <div class="count-number purchase_return-data text-white"><?php echo e($total_sale); ?></div>
                   </div>
                 </div>
                 <!-- Count item widget-->
                 <div class="col-sm-3">
-                  <div class="wrapper count-title text-center">
-                    <div class="icon"><i class="dripicons-trophy" style="color: #297ff9"></i></div>
-                    <div class="name"><strong style="color: #297ff9">Total Projects</strong></div>
-                    <div class="count-number profit-data"><?php echo e($total_project); ?></div>
+                  <div class="wrapper count-title text-center" style="background-color: #297ff9">
+                    <div class="icon"><i class="dripicons-trophy" style="color: #fff"></i></div>
+                    <div class="name"><strong style="color: #fff">Total Projects</strong></div>
+                    <div class="count-number profit-data text-white"><?php echo e($total_project); ?></div>
                   </div>
                 </div>
               </div>
@@ -158,34 +169,40 @@
               <div class="row">
                 <!-- Count item widget-->
                 <div class="col-sm-3">
-                  <div class="wrapper count-title text-center">
-                    <div class="icon"><i class="dripicons-graph-bar" style="color: #733686"></i></div>
-                    <div class="name"><strong style="color: #733686;font-size: 18px;">Total Reminder</strong></div>
-                    <div class="count-number revenue-data"><?php echo e($total_reminder); ?></div>
+                  <div class="wrapper count-title text-center" style="background-color: #ff8952">
+
+
+                    <div class="icon"><i class="dripicons-graph-bar text-white" ></i></div>
+                    <div class="name"><strong style="color: #fff; ">Total Reminder</strong></div>
+                    <div class="count-number revenue-data text-white "><?php echo e($total_reminder); ?></div>
                   </div>
                 </div>
                 <!-- Count item widget-->
                 <div class="col-sm-3">
-                  <div class="wrapper count-title text-center">
-                    <div class="icon"><i class="dripicons-return" style="color: #ff8952"></i></div>
-                    <div class="name"><strong style="color: #ff8952; font-size: 18px;">Total Reminder Complete</strong></div>
-                    <div class="count-number return-data"><?php echo e($total_reminder_complete); ?></div>
+                  <div class="wrapper count-title text-center" style="background-color: #00c689">
+                      <div class="icon"><i class="dripicons-return" style="color: #fff"></i></div>
+                    <div class="name"><strong style="color: #fff; "> Reminder Complete</strong></div>
+                    <div class="count-number return-data text-white"><?php echo e($total_reminder_complete); ?></div>
                   </div>
                 </div>
                 <!-- Count item widget-->
                 <div class="col-sm-3">
-                  <div class="wrapper count-title text-center">
-                    <div class="icon"><i class="dripicons-media-loop" style="color: #00c689"></i></div>
-                    <div class="name"><strong style="color: #00c689;font-size: 18px;">Total Due Reminder</strong></div>
-                    <div class="count-number purchase_return-data"><?php echo e($total_reminder - $total_reminder_complete); ?></div>
+                  <div class="wrapper count-title text-center" style="background-color: #297ff9">
+
+                    <div class="icon"><i class="dripicons-media-loop" style="color: #fff"></i></div>
+                    <div class="name"><strong style="color: #fff;"> Due Reminder</strong></div>
+                    <div class="count-number purchase_return-data text-white"><?php echo e($total_reminder - $total_reminder_complete); ?></div>
                   </div>
                 </div>
                 <!-- Count item widget-->
                 <div class="col-sm-3">
-                  <div class="wrapper count-title text-center">
-                    <div class="icon"><i class="dripicons-trophy" style="color: #297ff9"></i></div>
-                    <div class="name"><strong style="color: #297ff9;font-size: 18px;">Total Meeting</strong></div>
-                    <div class="count-number profit-data"><?php echo e($total_meeting); ?></div>
+                  <div class="wrapper count-title text-center" style="background-color: #733686">
+
+
+
+                    <div class="icon"><i class="dripicons-trophy" style="color: #fff"></i></div>
+                    <div class="name"><strong style="color: #fff;">Total Meeting</strong></div>
+                    <div class="count-number profit-data text-white"><?php echo e($total_meeting); ?></div>
                   </div>
                 </div>
               </div>
@@ -307,7 +324,8 @@
                         <tr>
                           <th><?php echo e(trans('file.date')); ?></th>
                           <th><?php echo e(trans('file.reference')); ?></th>
-                          <th><?php echo e(trans('file.customer')); ?></th>
+                          <th>Company Name</th>
+                          <th>Customer Name</th>
                           <th>Sale Status</th>
                           <th>Payment Status</th>
                           <th><?php echo e(trans('file.grand total')); ?></th>
@@ -318,6 +336,8 @@
                           <tr>
                             <td><?php echo e(date($general_setting->date_format, strtotime($sale->created_at->toDateString()))); ?></td>
                             <td><?php echo e($sale->reference_no ?? ''); ?></td>
+                            <td><?php echo e($sale->customer->company_name ?? ''); ?></td>
+
                             <td><?php echo e($sale->customer->name ?? ''); ?></td>
                             <?php if($sale->sale_status == 1): ?>
                               <td><div class="badge badge-success">Completed</div></td>

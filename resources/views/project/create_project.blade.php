@@ -18,11 +18,12 @@
                                     </div>
 
                                     <div class="form-group">
+                                        
                                         <label>Customer *</label>
                                         <input type="hidden" name="customer_id_hidden" value="{{$lims_sale_list->customer_id}}">
                                         <select required name="customer_id" class="form-control">
                                             @foreach($lims_customer_list as $customer)
-                                                <option  selected value="{{$customer->id}} ">{{$customer->name}} ( {{$customer->company_name}} )</option>
+                                                <option selected value="{{$customer->id}} ">{{$customer->company_name}} ({{ $customer->name}})</option>
                                             @endforeach
                                         </select>
                                     </div>

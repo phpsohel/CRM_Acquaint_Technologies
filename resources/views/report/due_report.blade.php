@@ -32,6 +32,7 @@
                     <th class="not-exported"></th>
                     <th>{{trans('file.Date')}}</th>
                     <th>{{trans('file.reference')}}</th>
+                    <th>Company Name</th>
                     <th>{{trans('file.Customer Details')}}</th>
                     <th>{{trans('file.Paid')}}</th>
                     <th>{{trans('file.Due')}}</th>
@@ -43,6 +44,8 @@
                     <td>{{$key}}</td>
                     <td>{{date($general_setting->date_format, strtotime($sale_data->created_at->toDateString())) . ' '. $sale_data->created_at->toTimeString()}}</td>
                     <td>{{$sale_data->reference_no}}</td>
+                    <td>{{$sale_data->customer->company_name ?? ''}}</td>
+
                     <?php
                         $customer = DB::table('customers')->find($sale_data->customer_id);
                     ?>
@@ -59,6 +62,7 @@
             <tfoot class="tfoot active">
                 <th></th>
                 <th>{{trans('file.Total')}}:</th>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th>0.00</th>
@@ -172,12 +176,12 @@
         if (dt_selector.rows( '.selected' ).any() && is_calling_first) {
             var rows = dt_selector.rows( '.selected' ).indexes();
 
-            $( dt_selector.column( 4 ).footer() ).html(dt_selector.cells( rows, 4, { page: 'current' } ).data().sum().toFixed(2));
             $( dt_selector.column( 5 ).footer() ).html(dt_selector.cells( rows, 5, { page: 'current' } ).data().sum().toFixed(2));
+            $( dt_selector.column( 6 ).footer() ).html(dt_selector.cells( rows, 6, { page: 'current' } ).data().sum().toFixed(2));
         }
         else {
-            $( dt_selector.column( 4 ).footer() ).html(dt_selector.column( 4, {page:'current'} ).data().sum().toFixed(2));
             $( dt_selector.column( 5 ).footer() ).html(dt_selector.column( 5, {page:'current'} ).data().sum().toFixed(2));
+            $( dt_selector.column( 6 ).footer() ).html(dt_selector.column( 6, {page:'current'} ).data().sum().toFixed(2));
         }
     }
 

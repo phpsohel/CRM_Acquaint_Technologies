@@ -111,6 +111,7 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::post('unit/deletebyselection', 'UnitController@deleteBySelection');
 	Route::get('unit/lims_unit_search', 'UnitController@limsUnitSearch')->name('unit.search');
 	Route::resource('unit', 'UnitController');
+	Route::resource('thana', 'ThanaController');
 
 	Route::post('category/import', 'CategoryController@import')->name('category.import');
 	Route::post('category/deletebyselection', 'CategoryController@deleteBySelection');
@@ -326,16 +327,31 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 
 	Route::post('report/product_report', 'ReportController@productReport')->name('report.product');
 	Route::post('report/purchase', 'ReportController@purchaseReport')->name('report.purchase');
+
+	Route::get('report/sale_report', 'ReportController@getsaleReport')->name('report.getsale');
 	Route::post('report/sale_report', 'ReportController@saleReport')->name('report.sale');
+
+	Route::get('report/lead_source', 'ReportController@getleadSourceReport')->name('report.getlead_source');
 	Route::post('report/lead_source', 'ReportController@leadSourceReport')->name('report.lead_source');
+
+	Route::get('report/lead_status', 'ReportController@getleadStatusReport')->name('report.getlead_status');
 	Route::post('report/lead_status', 'ReportController@leadStatusReport')->name('report.lead_status');
+
+	Route::get('report/lead_reminder_report', 'ReportController@getleadReminderReport')->name('report.getlead_reminder_report');
 	Route::post('report/lead_reminder_report', 'ReportController@leadReminderReport')->name('report.lead_reminder_report');
+	
+	Route::get('report/lead_employee_report', 'ReportController@getleadEmployeeReport')->name('report.getlead_employee');
 	Route::post('report/lead_employee_report', 'ReportController@leadEmployeeReport')->name('report.lead_employee');
+
+	Route::get('report/payment_report_by_date', 'ReportController@getpaymentReportByDate')->name('report.getpaymentByDate');
 	Route::post('report/payment_report_by_date', 'ReportController@paymentReportByDate')->name('report.paymentByDate');
+
 	Route::post('report/warehouse_report', 'ReportController@warehouseReport')->name('report.warehouse');
 	Route::post('report/user_report', 'ReportController@userReport')->name('report.user');
 	Route::post('report/customer_report', 'ReportController@customerReport')->name('report.customer');
 	Route::post('report/supplier', 'ReportController@supplierReport')->name('report.supplier');
+
+	Route::get('report/due_report_by_date', 'ReportController@getdueReportByDate')->name('report.getdueByDate');
 	Route::post('report/due_report_by_date', 'ReportController@dueReportByDate')->name('report.dueByDate');
 
 	Route::get('user/profile/{id}', 'UserController@profile')->name('user.profile');
